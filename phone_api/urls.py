@@ -3,6 +3,7 @@ from phone_api import views
 
 
 urlpatterns=[
-    path('company/', views.company_list),
-    path('company/<str:company_id>', views.company_detail),
+    path('CompanyProducts/', views.CompanyList.as_view()),
+    path('CompanyProducts/<str:company_id>/', views.CompanyDetail.as_view()),
+    path('CreateProduct/<str:company_id>/', views.CreateProduct.as_view()), 
 ]

@@ -11,12 +11,12 @@ class Company(models.Model):
         return self.company_id
 
 class Product(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, related_name='products', on_delete=models.CASCADE)
     product_id = models.CharField(max_length=50, primary_key=True)
-    value = models.IntegerField()
+    value = models.FloatField()
 
     class Meta:
         ordering = ['product_id']
 
     def __str__(self):
-        return self.product_id
+        return "'id': '{}','value':{}".format(self.product_id, self.value)
