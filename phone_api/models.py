@@ -22,9 +22,9 @@ class Product(models.Model):
         return "'id': '{}','value':{}".format(self.product_id, self.value)
 
 class Recharge(models.Model):
-    created_at = models.DateTimeField()
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    company = models.ForeignKey(Company,  related_name='recharges', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='recharges', on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=100)
     value = models.FloatField()
 
