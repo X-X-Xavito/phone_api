@@ -14,4 +14,11 @@ urlpatterns=[
     path('UpdateProduct/<str:product_id>/', views.ProductUpdateAPIView.as_view()), #Update Product
     
     path('DeleteProduct/<str:product_id>/', views.ProductDeleteAPIView.as_view()), #Delete Product
+
+    path('PhoneRecharges/', views.RechargeCreateAPIView.as_view()), #Create Recharge
+    
+    path('PhoneRecharges/id/<int:pk>/', views.RechargeRetriveAPIView.as_view()), #Retrieve single Recharge
+
+    path('PhoneRecharges/<str:phone_number>/', views.RechargeListAPIView.as_view()), #List Recharges
+
 ]
