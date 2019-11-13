@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from phone_api.models import Company, Product
+from phone_api.models import Company, Product, Recharge
 
 
 
@@ -13,3 +13,9 @@ class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = ['company_id', 'products']
+
+class RechargeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Recharge
+        fields = ['id', 'created_at', 'company', 'product', 'phone_number', 'value']
