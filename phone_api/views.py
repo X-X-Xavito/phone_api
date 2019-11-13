@@ -1,10 +1,10 @@
-from phone_api.models import Company, Product
-from phone_api.serializers import CompanySerializer, ProductSerializer
-from rest_framework import generics
 from django.http import Http404
-from rest_framework.response import Response
-from rest_framework import status
 
+from rest_framework import generics, mixins, status
+from rest_framework.response import Response
+
+from phone_api.models import Company, Product, Recharge
+from phone_api.serializers import CompanySerializer, ProductSerializer, RechargeSerializer
 
 class CompanyListAPIView(generics.ListAPIView):
     queryset = Company.objects.all()
@@ -16,7 +16,6 @@ class CompanyRetDesAPIView(generics.RetrieveDestroyAPIView):
 
     def get_object(self):
         company_id = self.kwargs.get('company_id')
-        print('company_id', company_id)
         try:
             return Company.objects.get(company_id=company_id)
         except Company.DoesNotExist:
@@ -42,8 +41,30 @@ class ProductUpdateAPIView(generics.UpdateAPIView):
     def perform_update(self, serializer):
         serializer.save(product_id=self.kwargs.get('product_id'))
 
-
 class ProductDeleteAPIView(generics.DestroyAPIView):
     lookup_field = 'product_id'
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+class RechargeCreateAPIView(generics.CreateAPIView):
+    queryset = Recharge.objects.all()
+    serializer_class = RechargeSerializer
+
+class RechargeListAPIView(generics.ListAPIView):
+    lookup_field='phone_number'
+    serializer_class = RechargeSerializer
+
+    def get_queryset(self):
+        phone_number = self.kwargs.get('phone_number')
+        return Recharge.objects.filter(phone_number=phone_number)
+
+class RechargeRetriveAPIView(generics.RetrieveAPIView):
+    lookup_field='id'
+    serializer_class = RechargeSerializer
+
+    def get_object(self):
+        recharge_id = self.kwargs.get('pk')
+        try:
+            return Recharge.objects.get(id=recharge_id)
+        except Recharge.DoesNotExist:
+            raise Http404
