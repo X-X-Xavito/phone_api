@@ -20,3 +20,16 @@ class Product(models.Model):
 
     def __str__(self):
         return "'id': '{}','value':{}".format(self.product_id, self.value)
+
+class Recharge(models.Model):
+    created_at = models.DateTimeField()
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    phone_number = models.CharField(max_length=100)
+    value = models.FloatField()
+
+    class Meta:
+        ordering = ['id']
+
+    def __str__(self):
+        return "Recharge {} - Phone_number{} - value {}".format(id, self.phone_number, self.value)
