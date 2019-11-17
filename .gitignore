@@ -3,6 +3,7 @@ db.sqlite3
 core/__pycache__
 phone_api/migrations
 phone_api/__pycache__
+phone_api/tests/__pycache__
 phone_api/.pytest_cache
 .pytest_cache/
 
