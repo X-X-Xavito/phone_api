@@ -1,6 +1,6 @@
 import pytest
 
-from .models import Company, Product, Recharge
+from phone_api.models import Company, Product, Recharge
 
 pytestmark = pytest.mark.django_db
 
